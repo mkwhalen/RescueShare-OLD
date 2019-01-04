@@ -234,34 +234,34 @@ namespace RescueShare.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Trips",
+                name: "Transports",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     PickupTime = table.Column<DateTime>(nullable: false),
                     DropoffTime = table.Column<DateTime>(nullable: false),
-                    TripTime = table.Column<DateTime>(nullable: false),
+                    TransportTime = table.Column<DateTime>(nullable: false),
                     SendingShelterId = table.Column<string>(nullable: true),
                     ReceivingShelterId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trips", x => x.Id);
+                    table.PrimaryKey("PK_Transports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trips_Shelters_ReceivingShelterId",
+                        name: "FK_Transports_Shelters_ReceivingShelterId",
                         column: x => x.ReceivingShelterId,
                         principalTable: "Shelters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Trips_Shelters_SendingShelterId",
+                        name: "FK_Transports_Shelters_SendingShelterId",
                         column: x => x.SendingShelterId,
                         principalTable: "Shelters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Trips_AspNetUsers_UserId",
+                        name: "FK_Transports_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -368,18 +368,18 @@ namespace RescueShare.Migrations
                 column: "ShelterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_ReceivingShelterId",
-                table: "Trips",
+                name: "IX_Transports_ReceivingShelterId",
+                table: "Transports",
                 column: "ReceivingShelterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_SendingShelterId",
-                table: "Trips",
+                name: "IX_Transports_SendingShelterId",
+                table: "Transports",
                 column: "SendingShelterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_UserId",
-                table: "Trips",
+                name: "IX_Transports_UserId",
+                table: "Transports",
                 column: "UserId");
         }
 
@@ -407,7 +407,7 @@ namespace RescueShare.Migrations
                 name: "Opportunities");
 
             migrationBuilder.DropTable(
-                name: "Trips");
+                name: "Transports");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -22,15 +22,7 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">RescueShare</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Shelters" asp-action="ManageSpaces">Manage Spaces</a></li>
-                    <li><a asp-area="" asp-controller="Shelters" asp-action="ManageDogs">Manage Dogs</a></li>
-                    <li><a asp-area="" asp-controller="Shelters" asp-action="ManageTransports">Manage Transports</a></li>
-                    <li><a asp-area="" asp-controller="Shelters" asp-action="Contact">Contact</a></li>
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
+            <partial name="_NavBarPartial" />
         </div>
     </nav>
 </body>

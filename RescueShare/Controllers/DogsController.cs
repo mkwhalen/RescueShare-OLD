@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,98 +9,69 @@ using RescueShare.Models;
 
 namespace RescueShare.Controllers
 {
-    public class SheltersController : Controller
+    public class DogsController : Controller
     {
         private readonly RescueContext _context;
 
-        public SheltersController(RescueContext context)
+        public DogsController(RescueContext context)
         {
             _context = context;
         }
 
-        public IActionResult ManageSpaces()
-        { 
-            return View(new List<Space>());
-        }
-
-        public IActionResult ManageDogs()
-        {
-            return View(new List<Dog>());
-        }
-
-        public IActionResult ManageTransports()
-        {
-            return View(new List<Transport>());
-        }
-
-        // GET: Shelters
+        // GET: Dogs
         public async Task<IActionResult> Index()
         {
-            var shelter = await _context.ShelterMembers
-                .Include(sm => sm.Shelter)
-                .Where(sm => sm.UserId == User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)
-                .Select(sm => sm.Shelter)
-                .FirstOrDefaultAsync();
-            if (shelter == null)
-            {
-                return NotFound();
-            }
-            return View(shelter);
+            var rescueContext = _context.Dogs.Include(d => d.Shelter).Include(d => d.Space);
+            return View(await rescueContext.ToListAsync());
         }
 
-        // GET: Shelters/Details/5
+        // GET: Dogs/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            
 
-            var shelter = await _context.Shelters
+            var dog = await _context.Dogs
+                .Include(d => d.Shelter)
+                .Include(d => d.Space)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (dog == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(dog);
         }
 
-        // GET: Shelters/Create
+        // GET: Dogs/Create
         public IActionResult Create()
         {
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
+            ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id");
             return View();
         }
 
-        // GET: Shelters/Images
-        [HttpGet]
-        public IActionResult Image()
-        {
-            using (RescueContext dbContext = new RescueContext())
-            {
-                List<string> iamgeIds = dbContext.Images.Select(m => m.Id).ToList();
-                return View(iamgeIds);
-            }
-        }
-
-        // POST: Shelters/Create
+        // POST: Dogs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Create([Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,ShelterId")] Dog dog)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shelter);
+                _context.Add(dog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
+            return View(dog);
         }
 
-        // GET: Shelters/Edit/5
+        // GET: Dogs/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -109,22 +79,24 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
+            var dog = await _context.Dogs.FindAsync(id);
+            if (dog == null)
             {
                 return NotFound();
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
+            return View(dog);
         }
 
-        // POST: Shelters/Edit/5
+        // POST: Dogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,ShelterId")] Dog dog)
         {
-            if (id != shelter.Id)
+            if (id != dog.Id)
             {
                 return NotFound();
             }
@@ -133,12 +105,12 @@ namespace RescueShare.Controllers
             {
                 try
                 {
-                    _context.Update(shelter);
+                    _context.Update(dog);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShelterExists(shelter.Id))
+                    if (!DogExists(dog.Id))
                     {
                         return NotFound();
                     }
@@ -149,10 +121,12 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
+            return View(dog);
         }
 
-        // GET: Shelters/Delete/5
+        // GET: Dogs/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -160,30 +134,32 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters
+            var dog = await _context.Dogs
+                .Include(d => d.Shelter)
+                .Include(d => d.Space)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (dog == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(dog);
         }
 
-        // POST: Shelters/Delete/5
+        // POST: Dogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var shelter = await _context.Shelters.FindAsync(id);
-            _context.Shelters.Remove(shelter);
+            var dog = await _context.Dogs.FindAsync(id);
+            _context.Dogs.Remove(dog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShelterExists(string id)
+        private bool DogExists(string id)
         {
-            return _context.Shelters.Any(e => e.Id == id);
+            return _context.Dogs.Any(e => e.Id == id);
         }
     }
 }

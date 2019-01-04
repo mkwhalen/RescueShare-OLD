@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 namespace RescueShare.Models.Entities
 {
-    public class Image
+    public class DogBreed
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Data { get; set; }
-        public int Height { get; set; }
-        public int Length { get; set; }
-        public int Width { get; set; }
-
+        // note: you can add other properties here for things like temperment, size, etc.
     }
 }

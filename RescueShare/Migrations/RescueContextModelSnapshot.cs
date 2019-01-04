@@ -133,7 +133,7 @@ namespace RescueShare.Migrations
 
                     b.Property<double>("Age");
 
-                    b.Property<string>("Breed");
+                    b.Property<string>("BreedId");
 
                     b.Property<string>("CurrentInjuries");
 
@@ -163,6 +163,8 @@ namespace RescueShare.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BreedId");
+
                     b.HasIndex("ImageId");
 
                     b.HasIndex("ShelterId");
@@ -170,6 +172,18 @@ namespace RescueShare.Migrations
                     b.HasIndex("SpaceId");
 
                     b.ToTable("Dogs");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.Entities.DogBreed", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DogBreeds");
                 });
 
             modelBuilder.Entity("RescueShare.Models.Entities.Image", b =>
@@ -224,6 +238,24 @@ namespace RescueShare.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OpportunityTypes");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.Entities.UserDeniedDogBreed", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DogBreedId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DogBreedId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDeniedDogBreeds");
                 });
 
             modelBuilder.Entity("RescueShare.Models.Shelter", b =>
@@ -291,7 +323,7 @@ namespace RescueShare.Migrations
                     b.ToTable("Spaces");
                 });
 
-            modelBuilder.Entity("RescueShare.Models.Trips", b =>
+            modelBuilder.Entity("RescueShare.Models.Transport", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -304,7 +336,7 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("SendingShelterId");
 
-                    b.Property<DateTime>("TripTime");
+                    b.Property<DateTime>("TransportTime");
 
                     b.Property<string>("UserId");
 
@@ -316,7 +348,7 @@ namespace RescueShare.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Trips");
+                    b.ToTable("Transports");
                 });
 
             modelBuilder.Entity("RescueShare.Models.User", b =>
@@ -333,6 +365,24 @@ namespace RescueShare.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FosterAges");
+
+                    b.Property<string>("FosterAvailability");
+
+                    b.Property<string>("FosterBreeds");
+
+                    b.Property<int>("FosterSpace");
+
+                    b.Property<string>("FosterTemperment");
+
+                    b.Property<string>("FosterWeights");
+
+                    b.Property<bool>("IsDriver");
+
+                    b.Property<bool>("IsFoster");
+
+                    b.Property<bool>("IsVolunteer");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -352,7 +402,15 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int>("Spaces");
+                    b.Property<string>("TransportDayAvailability");
+
+                    b.Property<int>("TransportSpace");
+
+                    b.Property<string>("TransportTemperment");
+
+                    b.Property<string>("TransportTimeAvailability");
+
+                    b.Property<string>("TransportWeights");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -369,6 +427,74 @@ namespace RescueShare.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedDogAge", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AgeMid");
+
+                    b.Property<bool>("AgePuppy");
+
+                    b.Property<bool>("AgeSenior");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDeniedAges");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedDogWeight", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("UserId");
+
+                    b.Property<bool>("WeightClassLarge");
+
+                    b.Property<bool>("WeightClassMedium");
+
+                    b.Property<bool>("WeightClassMini");
+
+                    b.Property<bool>("WeightClassSmall");
+
+                    b.Property<bool>("WieghtClassExtraLarge");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDeniedDogWeights");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedTemperment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Biter");
+
+                    b.Property<bool>("GoodWithCats");
+
+                    b.Property<bool>("GoodWithDogs");
+
+                    b.Property<bool>("GoodWithKids");
+
+                    b.Property<bool>("SpecialNeeds");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDeniedTemperments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -418,6 +544,10 @@ namespace RescueShare.Migrations
 
             modelBuilder.Entity("RescueShare.Models.Dog", b =>
                 {
+                    b.HasOne("RescueShare.Models.Entities.DogBreed", "Breed")
+                        .WithMany()
+                        .HasForeignKey("BreedId");
+
                     b.HasOne("RescueShare.Models.Entities.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
@@ -442,6 +572,17 @@ namespace RescueShare.Migrations
                         .HasForeignKey("TypeId");
                 });
 
+            modelBuilder.Entity("RescueShare.Models.Entities.UserDeniedDogBreed", b =>
+                {
+                    b.HasOne("RescueShare.Models.Entities.DogBreed", "DogBreed")
+                        .WithMany()
+                        .HasForeignKey("DogBreedId");
+
+                    b.HasOne("RescueShare.Models.User", "User")
+                        .WithMany("UserDeniedDogBreeds")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("RescueShare.Models.ShelterMember", b =>
                 {
                     b.HasOne("RescueShare.Models.Shelter", "Shelter")
@@ -460,7 +601,7 @@ namespace RescueShare.Migrations
                         .HasForeignKey("ShelterId");
                 });
 
-            modelBuilder.Entity("RescueShare.Models.Trips", b =>
+            modelBuilder.Entity("RescueShare.Models.Transport", b =>
                 {
                     b.HasOne("RescueShare.Models.Shelter", "ReceivingShelter")
                         .WithMany()
@@ -472,6 +613,27 @@ namespace RescueShare.Migrations
 
                     b.HasOne("RescueShare.Models.User", "User")
                         .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedDogAge", b =>
+                {
+                    b.HasOne("RescueShare.Models.User")
+                        .WithMany("UserDeniedDogAges")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedDogWeight", b =>
+                {
+                    b.HasOne("RescueShare.Models.User")
+                        .WithMany("UserDeniedDogWeights")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("RescueShare.Models.UserDeniedTemperment", b =>
+                {
+                    b.HasOne("RescueShare.Models.User")
+                        .WithMany("UserDeniedTemperments")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

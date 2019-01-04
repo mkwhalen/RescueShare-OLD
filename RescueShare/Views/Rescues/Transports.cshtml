@@ -1,10 +1,10 @@
-﻿@model IEnumerable<RescueShare.Models.Trips>
+﻿@model IEnumerable<RescueShare.Models.Transport>
 
 @{
-    ViewData["Title"] = "Trips";
+    ViewData["Title"] = "Transports";
 }
 
-<h2>Trips</h2>
+<h2>Transports</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.DropoffTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TripTime)
+                @Html.DisplayNameFor(model => model.TransportTime)
             </th>
             <th></th>
         </tr>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.DropoffTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TripTime)
+                @Html.DisplayFor(modelItem => item.TransportTime)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -553,7 +553,7 @@ var i,
 	push_native = arr.push,
 	push = arr.push,
 	slice = arr.slice,
-	// Use a stripped-down indexOf as it's faster than native
+	// Use a sTransportped-down indexOf as it's faster than native
 	// https://jsperf.com/thor-indexof-vs-for/5
 	indexOf = function( list, elem ) {
 		var i = 0,
@@ -1687,7 +1687,7 @@ Expr = Sizzle.selectors = {
 			if ( match[3] ) {
 				match[2] = match[4] || match[5] || "";
 
-			// Strip excess characters from unquoted arguments
+			// STransport excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
 				// Get excess from tokenize (recursively)
 				(excess = tokenize( unquoted, true )) &&
@@ -7779,9 +7779,9 @@ jQuery.each( [
 
 
 
-	// Strip and collapse whitespace according to HTML spec
-	// https://infra.spec.whatwg.org/#strip-and-collapse-ascii-whitespace
-	function stripAndCollapse( value ) {
+	// STransport and collapse whitespace according to HTML spec
+	// https://infra.spec.whatwg.org/#sTransport-and-collapse-ascii-whitespace
+	function sTransportAndCollapse( value ) {
 		var tokens = value.match( rnothtmlwhite ) || [];
 		return tokens.join( " " );
 	}
@@ -7817,7 +7817,7 @@ jQuery.fn.extend( {
 		if ( classes.length ) {
 			while ( ( elem = this[ i++ ] ) ) {
 				curValue = getClass( elem );
-				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
+				cur = elem.nodeType === 1 && ( " " + sTransportAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
 					j = 0;
@@ -7828,7 +7828,7 @@ jQuery.fn.extend( {
 					}
 
 					// Only assign if different to avoid unneeded rendering.
-					finalValue = stripAndCollapse( cur );
+					finalValue = sTransportAndCollapse( cur );
 					if ( curValue !== finalValue ) {
 						elem.setAttribute( "class", finalValue );
 					}
@@ -7860,7 +7860,7 @@ jQuery.fn.extend( {
 				curValue = getClass( elem );
 
 				// This expression is here for better compressibility (see addClass)
-				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
+				cur = elem.nodeType === 1 && ( " " + sTransportAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
 					j = 0;
@@ -7873,7 +7873,7 @@ jQuery.fn.extend( {
 					}
 
 					// Only assign if different to avoid unneeded rendering.
-					finalValue = stripAndCollapse( cur );
+					finalValue = sTransportAndCollapse( cur );
 					if ( curValue !== finalValue ) {
 						elem.setAttribute( "class", finalValue );
 					}
@@ -7952,7 +7952,7 @@ jQuery.fn.extend( {
 		className = " " + selector + " ";
 		while ( ( elem = this[ i++ ] ) ) {
 			if ( elem.nodeType === 1 &&
-				( " " + stripAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
+				( " " + sTransportAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
 					return true;
 			}
 		}
@@ -8046,9 +8046,9 @@ jQuery.extend( {
 
 					// Support: IE <=10 - 11 only
 					// option.text throws exceptions (#14686, #14858)
-					// Strip and collapse whitespace
-					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
-					stripAndCollapse( jQuery.text( elem ) );
+					// STransport and collapse whitespace
+					// https://html.spec.whatwg.org/#sTransport-and-collapse-whitespace
+					sTransportAndCollapse( jQuery.text( elem ) );
 			}
 		},
 		select: {
@@ -9857,7 +9857,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		off = url.indexOf( " " );
 
 	if ( off > -1 ) {
-		selector = stripAndCollapse( url.slice( off ) );
+		selector = sTransportAndCollapse( url.slice( off ) );
 		url = url.slice( 0, off );
 	}
 

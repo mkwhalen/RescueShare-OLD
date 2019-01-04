@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RescueShare.Models
 {
-    public class Trips
+    public class Transport
     {
 
         public string Id { get; set; }
         public DateTime PickupTime { get; set; }
         public DateTime DropoffTime { get; set; }
-        public DateTime TripTime { get; set; }
+        public DateTime TransportTime { get; set; }
         public string SendingShelterId { get; set; }
         public string ReceivingShelterId { get; set; }
         public string UserId { get; set; }

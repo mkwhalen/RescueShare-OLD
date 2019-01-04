@@ -254,7 +254,7 @@ namespace RescueShare.Migrations
                     b.ToTable("Spaces");
                 });
 
-            modelBuilder.Entity("RescueShare.Models.Trips", b =>
+            modelBuilder.Entity("RescueShare.Models.Transports", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -267,7 +267,7 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("SendingShelterId");
 
-                    b.Property<DateTime>("TripTime");
+                    b.Property<DateTime>("TransportTime");
 
                     b.Property<string>("UserId");
 
@@ -279,7 +279,7 @@ namespace RescueShare.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Trips");
+                    b.ToTable("Transports");
                 });
 
             modelBuilder.Entity("RescueShare.Models.User", b =>
@@ -408,7 +408,7 @@ namespace RescueShare.Migrations
                         .HasForeignKey("ShelterId");
                 });
 
-            modelBuilder.Entity("RescueShare.Models.Trips", b =>
+            modelBuilder.Entity("RescueShare.Models.Transports", b =>
                 {
                     b.HasOne("RescueShare.Models.Shelter", "ReceivingShelter")
                         .WithMany()
