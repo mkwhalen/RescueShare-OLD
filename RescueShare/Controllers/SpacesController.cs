@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,98 +9,66 @@ using RescueShare.Models;
 
 namespace RescueShare.Controllers
 {
-    public class SheltersController : Controller
+    public class SpacesController : Controller
     {
         private readonly RescueContext _context;
 
-        public SheltersController(RescueContext context)
+        public SpacesController(RescueContext context)
         {
             _context = context;
         }
 
-        public IActionResult ManageSpaces()
-        { 
-            return View(new List<Space>());
-        }
-
-        public IActionResult ManageDogs()
-        {
-            return View(new List<Dog>());
-        }
-
-        public IActionResult ManageTransports()
-        {
-            return View(new List<Trips>());
-        }
-
-        // GET: Shelters
+        // GET: Spaces
         public async Task<IActionResult> Index()
         {
-            var shelter = await _context.ShelterMembers
-                .Include(sm => sm.Shelter)
-                .Where(sm => sm.UserId == User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)
-                .Select(sm => sm.Shelter)
-                .FirstOrDefaultAsync();
-            if (shelter == null)
-            {
-                return NotFound();
-            }
-            return View(shelter);
+            var rescueContext = _context.Spaces.Include(s => s.Shelter);
+            return View(await rescueContext.ToListAsync());
         }
 
-        // GET: Shelters/Details/5
+        // GET: Spaces/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            
 
-            var shelter = await _context.Shelters
+            var space = await _context.Spaces
+                .Include(s => s.Shelter)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (space == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(space);
         }
 
-        // GET: Shelters/Create
+        // GET: Spaces/Create
         public IActionResult Create()
         {
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
             return View();
         }
 
-        // GET: Dog Images
-        [HttpGet]
-        public IActionResult Image()
-        {
-            using (RescueContext dbContext = new RescueContext())
-            {
-                List<Guid> iamgeIds = dbContext.Images.Select(m => m.Id).ToList();
-                return View(iamgeIds);
-            }
-        }
-
-        // POST: Shelters/Create
+        // POST: Spaces/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,Type,ShelterId")] Space space)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shelter);
+                _context.Add(space);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            return View(space);
         }
 
-        // GET: Shelters/Edit/5
+        // GET: Spaces/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -109,22 +76,23 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
+            var space = await _context.Spaces.FindAsync(id);
+            if (space == null)
             {
                 return NotFound();
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            return View(space);
         }
 
-        // POST: Shelters/Edit/5
+        // POST: Spaces/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,Type,ShelterId")] Space space)
         {
-            if (id != shelter.Id)
+            if (id != space.Id)
             {
                 return NotFound();
             }
@@ -133,12 +101,12 @@ namespace RescueShare.Controllers
             {
                 try
                 {
-                    _context.Update(shelter);
+                    _context.Update(space);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShelterExists(shelter.Id))
+                    if (!SpaceExists(space.Id))
                     {
                         return NotFound();
                     }
@@ -149,10 +117,11 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            return View(space);
         }
 
-        // GET: Shelters/Delete/5
+        // GET: Spaces/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -160,30 +129,31 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters
+            var space = await _context.Spaces
+                .Include(s => s.Shelter)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (space == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(space);
         }
 
-        // POST: Shelters/Delete/5
+        // POST: Spaces/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var shelter = await _context.Shelters.FindAsync(id);
-            _context.Shelters.Remove(shelter);
+            var space = await _context.Spaces.FindAsync(id);
+            _context.Spaces.Remove(space);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShelterExists(string id)
+        private bool SpaceExists(string id)
         {
-            return _context.Shelters.Any(e => e.Id == id);
+            return _context.Spaces.Any(e => e.Id == id);
         }
     }
 }

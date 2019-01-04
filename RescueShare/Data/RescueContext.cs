@@ -12,6 +12,10 @@ namespace RescueShare.Models
 {
     public class RescueContext : IdentityDbContext<User>
     {
+        public RescueContext()
+        {
+        }
+
         public RescueContext(DbContextOptions<RescueContext> options)
            : base(options)
         {
@@ -24,6 +28,9 @@ namespace RescueShare.Models
         public DbSet<Opportunity> Opportunities { get; set; }
         public DbSet<OpportunityType> OpportunityTypes { get; set; }
         public DbSet<ShelterMember> ShelterMembers { get; set; }
+        public DbSet<Image> Images { get; set; }
+
         
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RescueShare.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace RescueShare.Models
         public string ShelterId { get; set; }
 
 
+        public virtual Image Image{ get; set; }
         public virtual Space Space { get; set; }
         public virtual Shelter Shelter { get; set; }
     }
