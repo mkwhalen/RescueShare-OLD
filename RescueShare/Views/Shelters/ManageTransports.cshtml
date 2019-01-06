@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RescueShare.Models.Transport>
+﻿@model IEnumerable<RescueShare.Models.TransportViewModel>
 
 @{
     ViewData["Title"] = "ManageTransports";
@@ -11,7 +11,7 @@
 </p>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Transports" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -26,10 +26,10 @@
                 @Html.DisplayNameFor(model => model.TransportTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SendingShelter)
+                @Html.DisplayNameFor(model => model.SenderName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReceivingShelter)
+                @Html.DisplayNameFor(model => model.ReceiverName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
@@ -38,32 +38,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickupTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DropoffTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransportTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SendingShelter.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceivingShelter.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-controller="Transports" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-controller="Transports" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-controller="Transports" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PickupTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DropoffTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Id)
+                </td>
+                <td>
+                    <a asp-controller="Transports" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Transports" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Transports" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

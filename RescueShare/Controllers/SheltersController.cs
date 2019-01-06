@@ -29,9 +29,12 @@ namespace RescueShare.Controllers
             return View(new List<Dog>());
         }
 
-        public IActionResult ManageTransports()
+        public async Task<IActionResult> ManageTransports()
         {
-            return View(new List<Transport>());
+            var rescueContext = _context.Transports.Include(t => t.FosterReceiver).Include(t => t.FosterSender).Include(t => t.RescueReceiver).Include(t => t.RescueSender).Include(t => t.ShelterReceiver).Include(t => t.ShelterSender).Include(t => t.User);
+            var transports = await rescueContext.ToListAsync();
+            var viewmodels = transports.Select(t => new TransportViewModel(t));
+            return View(viewmodels);
         }
 
         // GET: Shelters

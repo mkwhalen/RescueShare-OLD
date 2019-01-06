@@ -1,4 +1,5 @@
-﻿@model RescueShare.Models.Transport
+﻿@model RescueShare.Models.TransportViewModel
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -6,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Transports</h4>
+    <h4>Transport</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,16 +29,52 @@
             @Html.DisplayFor(model => model.TransportTime)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.SendingShelter)
+            @Html.DisplayNameFor(model => model.ReceiverType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SendingShelter.Id)
+            @Html.DisplayFor(model => model.ReceiverType)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ReceivingShelter)
+            @Html.DisplayNameFor(model => model.SenderType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ReceivingShelter.Id)
+            @Html.DisplayFor(model => model.SenderType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelterSender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShelterSender.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelterReceiver)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShelterReceiver.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FosterSender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FosterSender.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FosterReceiver)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FosterReceiver.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RescueSender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RescueSender.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RescueReceiver)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RescueReceiver.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User)

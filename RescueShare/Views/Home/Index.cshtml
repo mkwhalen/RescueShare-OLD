@@ -1,7 +1,54 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+
+    if (user.IsShelterWorker)
+    {
+        <p>
+            Hi, shelter user!
+        </p>
+        <p>
+            <partial name="../Shelters/_ShelterLayout.cshtml" />
+        </p>
+    }
+
+    if (user.IsRescueWorker)
+    {
+        <p>
+            Hi, rescue user!
+        </p>
+        <p>
+            <partial name="../Rescues/_RescueLayout.cshtml" />
+        </p>
+    }
+
+    if (user.IsVolunteer)
+    {
+        <p>
+            Hi, driver user!
+        </p>
+        <p>
+            <partial name="../Volunteers/_VolunteerLayout.cshtml" />
+        </p>
+    }
+}
+
+
+
+<div>
+    <header>
+        Welcome. Let's save some dogs today.
+    </header>
+</div>
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
