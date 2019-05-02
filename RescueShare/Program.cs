@@ -19,6 +19,19 @@ namespace RescueShare
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(SetupConfiguration)
                 .UseStartup<Startup>();
+
+        private static void SetupConfiguration(WebHostBuilderContext ctx, IConfigurationBuilder builder)
+        {
+            // Removing the defualt configuation options
+            builder.Sources.Clear();
+
+            builder.AddJsonFile("appsettings.json", false, true)
+                   .AddEnvironmentVariables();
+        }
+
     }
 }
+
+

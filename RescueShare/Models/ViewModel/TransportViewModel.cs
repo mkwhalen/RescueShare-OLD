@@ -33,10 +33,7 @@ namespace RescueShare.Models
         public virtual Rescue RescueReceiver { get; set; }
         public virtual User User { get; set; }
 
-        public TransportViewModel()
-        {
-
-        }
+        
 
         public TransportViewModel(Transport entity)
         {
