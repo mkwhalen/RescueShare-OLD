@@ -2729,6 +2729,7 @@ select[multiple].input-sm {
 .form-group-sm select.form-control {
   height: 30px;
   line-height: 30px;
+  padding-left:15px;
 }
 .form-group-sm textarea.form-control,
 .form-group-sm select[multiple].form-control {

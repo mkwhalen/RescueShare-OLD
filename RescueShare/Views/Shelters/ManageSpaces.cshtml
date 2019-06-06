@@ -21,7 +21,10 @@
                 @Html.DisplayNameFor(model => model.Capacity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.SpaceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th></th>
         </tr>
@@ -36,7 +39,10 @@
                 @Html.DisplayFor(modelItem => item.Capacity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.SpaceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
                 <a asp-controller="Spaces" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

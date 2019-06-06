@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RescueShare.Models;
@@ -9,9 +10,10 @@ using RescueShare.Models;
 namespace RescueShare.Migrations
 {
     [DbContext(typeof(RescueContext))]
-    partial class RescueContextModelSnapshot : ModelSnapshot
+    [Migration("20190604201016_adding new enum")]
+    partial class addingnewenum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -394,7 +396,7 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("ShelterId");
 
-                    b.Property<int>("SpaceType");
+                    b.Property<int>("Type");
 
                     b.HasKey("Id");
 

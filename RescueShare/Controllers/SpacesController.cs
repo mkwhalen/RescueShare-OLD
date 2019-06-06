@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RescueShare.Models;
+using RescueShare.Models.Entities;
+using System.Web.Mvc.Html;
 
 namespace RescueShare.Controllers
 {
@@ -50,13 +52,14 @@ namespace RescueShare.Controllers
             ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
             return View();
         }
+        
 
         // POST: Spaces/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,Type,ShelterId")] Space space)
+        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,Type,ShelterId,Notes")] Space space)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +93,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,Type,ShelterId")] Space space)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,Type,ShelterId,Notes")] Space space)
         {
             if (id != space.Id)
             {

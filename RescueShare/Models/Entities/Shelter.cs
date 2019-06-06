@@ -9,13 +9,19 @@ namespace RescueShare.Models
     public class Shelter
     {
         public string Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Address1 { get; set; }
         public string Address2 { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         [MaxLength(2)]
         public string State { get; set; }
+        [Required]
         public string Zip { get; set; }
+        [Required]
         [Phone]
         public string Phone { get; set; }
         [EmailAddress]

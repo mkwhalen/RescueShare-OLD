@@ -1,6 +1,7 @@
 ﻿using RescueShare.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,9 +10,11 @@ namespace RescueShare.Models
     public class Dog
     {
         public string Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public double Weight { get; set; }
         public double Age { get; set; }
+        [Required]
         public DateTime InDate { get; set; }
         public DateTime OutDate { get; set; }
         //public string Breed { get; set; }

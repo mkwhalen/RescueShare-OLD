@@ -6,6 +6,10 @@
 
 <!DOCTYPE html>
 
+<p>
+    <partial name="../Shelters/_ShelterLayout"  />
+</p>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -25,11 +29,12 @@
                 @Html.DisplayNameFor(model => model.Capacity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.SpaceType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shelter)
-            </th>
+            <td>
+                @Html.DisplayNameFor(model => model.Notes)
+            </td>
+
             <th></th>
         </tr>
     </thead>
@@ -43,11 +48,12 @@
                 @Html.DisplayFor(modelItem => item.Capacity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.SpaceType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Shelter.Id)
+                @Html.DisplayFor(modelItem => item.Notes)
             </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -5,6 +5,9 @@
 }
 
 <!DOCTYPE html>
+<p>
+    <partial name="../Shelters/_ShelterLayout" />
+</p>
 
 <html>
 <head>
@@ -30,17 +33,18 @@
             @Html.DisplayFor(model => model.Capacity)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.SpaceType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.SpaceType)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Shelter)
+            @Html.DisplayNameFor(model => model.Notes)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Shelter.Id)
+            @Html.DisplayFor(model => model.Notes)
         </dd>
+
     </dl>
 </div>
 <div>

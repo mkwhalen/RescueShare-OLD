@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RescueShare.Models;
@@ -9,9 +10,10 @@ using RescueShare.Models;
 namespace RescueShare.Migrations
 {
     [DbContext(typeof(RescueContext))]
-    partial class RescueContextModelSnapshot : ModelSnapshot
+    [Migration("20190521231249_SpaceTableAdditions")]
+    partial class SpaceTableAdditions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,8 +151,7 @@ namespace RescueShare.Migrations
 
                     b.Property<bool>("IsSaved");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<string>("Notes");
 
@@ -220,8 +221,7 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("LocationId");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.Property<string>("TypeId");
 
@@ -251,28 +251,22 @@ namespace RescueShare.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address1")
-                        .IsRequired();
+                    b.Property<string>("Address1");
 
                     b.Property<string>("Address2");
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Phone")
-                        .IsRequired();
+                    b.Property<string>("Phone");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasMaxLength(2);
 
-                    b.Property<string>("Zip")
-                        .IsRequired();
+                    b.Property<string>("Zip");
 
                     b.HasKey("Id");
 
@@ -334,28 +328,22 @@ namespace RescueShare.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address1")
-                        .IsRequired();
+                    b.Property<string>("Address1");
 
                     b.Property<string>("Address2");
 
-                    b.Property<string>("City")
-                        .IsRequired();
+                    b.Property<string>("City");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Phone")
-                        .IsRequired();
+                    b.Property<string>("Phone");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasMaxLength(2);
 
-                    b.Property<string>("Zip")
-                        .IsRequired();
+                    b.Property<string>("Zip");
 
                     b.HasKey("Id");
 
@@ -387,14 +375,13 @@ namespace RescueShare.Migrations
 
                     b.Property<int>("Capacity");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<string>("Notes");
 
                     b.Property<string>("ShelterId");
 
-                    b.Property<int>("SpaceType");
+                    b.Property<string>("Type");
 
                     b.HasKey("Id");
 
