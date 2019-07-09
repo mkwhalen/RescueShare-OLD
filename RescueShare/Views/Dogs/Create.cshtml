@@ -18,6 +18,11 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Breed" class="control-label">Breed</label>
+                <input asp-for="Breed" class="form-control" />
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Weight" class="control-label"></label>
                 <input asp-for="Weight" class="form-control" />
                 <span asp-validation-for="Weight" class="text-danger"></span>
@@ -28,27 +33,23 @@
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="InDate" class="control-label"></label>
+                <label asp-for="InDate" class="control-label">In Date</label>
                 <input asp-for="InDate" class="form-control" />
                 <span asp-validation-for="InDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OutDate" class="control-label"></label>
+                <label asp-for="OutDate" class="control-label">Out Date</label>
                 <input asp-for="OutDate" class="form-control" />
                 <span asp-validation-for="OutDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Breed" class="control-label"></label>
-                <input asp-for="Breed" class="form-control" />
-                <span asp-validation-for="Breed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrentMedications" class="control-label"></label>
+                <label asp-for="CurrentMedications" class="control-label"> Current Medications</label>
                 <input asp-for="CurrentMedications" class="form-control" />
                 <span asp-validation-for="CurrentMedications" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CurrentInjuries" class="control-label"></label>
+                <label asp-for="CurrentInjuries" class="control-label">Current Injuries</label>
                 <input asp-for="CurrentInjuries" class="form-control" />
                 <span asp-validation-for="CurrentInjuries" class="text-danger"></span>
             </div>
@@ -63,25 +64,13 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Flag" class="control-label"></label>
-                <input asp-for="Flag" class="form-control" />
-                <span asp-validation-for="Flag" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="IsSaved" /> @Html.DisplayNameFor(model => model.IsSaved)
+                        <input asp-for="IsSaved" /> Rescued
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="SpaceId" class="control-label"></label>
-                <select asp-for="SpaceId" class ="form-control" asp-items="ViewBag.SpaceId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShelterId" class="control-label"></label>
-                <select asp-for="ShelterId" class ="form-control" asp-items="ViewBag.ShelterId"></select>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

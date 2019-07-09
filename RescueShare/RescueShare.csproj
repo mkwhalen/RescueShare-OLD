@@ -6,15 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20181216203315_ImagesTable.cs" />
-    <Compile Remove="Migrations\20181216203315_ImagesTable.Designer.cs" />
-    <Compile Remove="Migrations\20190104044658_UserTableAdditions2.cs" />
-    <Compile Remove="Migrations\20190104044658_UserTableAdditions2.Designer.cs" />
-    <Compile Remove="Migrations\20190104044816_UserUpdates.cs" />
-    <Compile Remove="Migrations\20190104044816_UserUpdates.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.38.2.1559" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

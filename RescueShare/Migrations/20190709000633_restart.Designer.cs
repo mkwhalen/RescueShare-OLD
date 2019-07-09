@@ -10,15 +10,15 @@ using RescueShare.Models;
 namespace RescueShare.Migrations
 {
     [DbContext(typeof(RescueContext))]
-    [Migration("20190105205953_TransportViewModel")]
-    partial class TransportViewModel
+    [Migration("20190709000633_restart")]
+    partial class restart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -151,7 +151,8 @@ namespace RescueShare.Migrations
 
                     b.Property<bool>("IsSaved");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<string>("Notes");
 
@@ -221,7 +222,8 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("LocationId");
 
-                    b.Property<string>("Title");
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<string>("TypeId");
 
@@ -251,22 +253,28 @@ namespace RescueShare.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address1");
+                    b.Property<string>("Address1")
+                        .IsRequired();
 
                     b.Property<string>("Address2");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .IsRequired();
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasMaxLength(2);
 
-                    b.Property<string>("Zip");
+                    b.Property<string>("Zip")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -328,22 +336,28 @@ namespace RescueShare.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address1");
+                    b.Property<string>("Address1")
+                        .IsRequired();
 
                     b.Property<string>("Address2");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .IsRequired();
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasMaxLength(2);
 
-                    b.Property<string>("Zip");
+                    b.Property<string>("Zip")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -375,11 +389,14 @@ namespace RescueShare.Migrations
 
                     b.Property<int>("Capacity");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Notes");
 
                     b.Property<string>("ShelterId");
 
-                    b.Property<string>("Type");
+                    b.Property<int>("SpaceType");
 
                     b.HasKey("Id");
 
@@ -447,71 +464,15 @@ namespace RescueShare.Migrations
 
                     b.Property<string>("TransportId");
 
-                    b.Property<string>("TransportViewModelId");
-
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TransportId");
 
-                    b.HasIndex("TransportViewModelId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("TransportMember");
-                });
-
-            modelBuilder.Entity("RescueShare.Models.TransportViewModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DropoffTime");
-
-                    b.Property<string>("FosterReceiverId");
-
-                    b.Property<string>("FosterSenderId");
-
-                    b.Property<string>("OrganizingRescueId");
-
-                    b.Property<DateTime>("PickupTime");
-
-                    b.Property<int>("ReceiverType");
-
-                    b.Property<string>("RescueReceiverId");
-
-                    b.Property<string>("RescueSenderId");
-
-                    b.Property<int>("SenderType");
-
-                    b.Property<string>("ShelterReceiverId");
-
-                    b.Property<string>("ShelterSenderId");
-
-                    b.Property<DateTime>("TransportTime");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FosterReceiverId");
-
-                    b.HasIndex("FosterSenderId");
-
-                    b.HasIndex("OrganizingRescueId");
-
-                    b.HasIndex("RescueReceiverId");
-
-                    b.HasIndex("RescueSenderId");
-
-                    b.HasIndex("ShelterReceiverId");
-
-                    b.HasIndex("ShelterSenderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TransportViewModel");
                 });
 
             modelBuilder.Entity("RescueShare.Models.User", b =>
@@ -834,45 +795,6 @@ namespace RescueShare.Migrations
                     b.HasOne("RescueShare.Models.Transport")
                         .WithMany("Transporters")
                         .HasForeignKey("TransportId");
-
-                    b.HasOne("RescueShare.Models.TransportViewModel")
-                        .WithMany("Transporters")
-                        .HasForeignKey("TransportViewModelId");
-
-                    b.HasOne("RescueShare.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("RescueShare.Models.TransportViewModel", b =>
-                {
-                    b.HasOne("RescueShare.Models.Foster", "FosterReceiver")
-                        .WithMany()
-                        .HasForeignKey("FosterReceiverId");
-
-                    b.HasOne("RescueShare.Models.Foster", "FosterSender")
-                        .WithMany()
-                        .HasForeignKey("FosterSenderId");
-
-                    b.HasOne("RescueShare.Models.Entities.Rescue", "OrganizingRescue")
-                        .WithMany()
-                        .HasForeignKey("OrganizingRescueId");
-
-                    b.HasOne("RescueShare.Models.Entities.Rescue", "RescueReceiver")
-                        .WithMany()
-                        .HasForeignKey("RescueReceiverId");
-
-                    b.HasOne("RescueShare.Models.Entities.Rescue", "RescueSender")
-                        .WithMany()
-                        .HasForeignKey("RescueSenderId");
-
-                    b.HasOne("RescueShare.Models.Shelter", "ShelterReceiver")
-                        .WithMany()
-                        .HasForeignKey("ShelterReceiverId");
-
-                    b.HasOne("RescueShare.Models.Shelter", "ShelterSender")
-                        .WithMany()
-                        .HasForeignKey("ShelterSenderId");
 
                     b.HasOne("RescueShare.Models.User", "User")
                         .WithMany()
