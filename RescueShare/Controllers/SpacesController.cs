@@ -59,7 +59,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,Type,ShelterId,Notes")] Space space)
+        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,SpaceType,ShelterId,Notes")] Space space)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,Type,ShelterId,Notes")] Space space)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,SpaceType,ShelterId,Notes")] Space space)
         {
             if (id != space.Id)
             {

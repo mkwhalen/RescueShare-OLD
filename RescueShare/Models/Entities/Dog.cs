@@ -17,7 +17,6 @@ namespace RescueShare.Models
         [Required]
         public DateTime InDate { get; set; }
         public DateTime OutDate { get; set; }
-        //public string Breed { get; set; }
         public string BreedId { get; set; }
         public string CurrentMedications { get; set; }
         public string CurrentInjuries { get; set; }
@@ -30,7 +29,7 @@ namespace RescueShare.Models
         public string ImageId { get; set; }
 
 
-        public virtual Image Image{ get; set; }
+        public virtual Image Image { get; set; }
         public virtual Space Space { get; set; }
         public virtual Shelter Shelter { get; set; }
         public virtual DogBreed Breed { get; set; }

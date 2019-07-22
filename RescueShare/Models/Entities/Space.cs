@@ -1,6 +1,8 @@
-﻿using RescueShare.Models.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using RescueShare.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace RescueShare.Models
         public string Name { get; set; }
         [Required]
         public int Capacity { get; set; }
-        [Required]
+        [Required, BindProperty, DisplayName("Type of Space")]
         public SpaceType SpaceType { get; set; }
         public string Notes { get; set; }
         public string ShelterId { get; set; }
