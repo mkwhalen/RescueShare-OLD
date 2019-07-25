@@ -11,7 +11,7 @@
 {
     var user = await UserManager.GetUserAsync(User);
 
-    if (user.IsDriver)
+    if (@User.FindFirst("VolunteerType").Value == "Driver")
     {
         <p>
             Hi, driver user lady!
@@ -30,7 +30,7 @@
 
     }
 
-    if (user.IsFoster)
+    if (@User.FindFirst("VolunteerType").Value == "Foster")
     {
         <p>
             Hi, foster user!
@@ -47,24 +47,5 @@
 
     }
 
-    if (user.IsFoster && user.IsDriver)
-    {
-        <p>
-            Hi, double user!
-        </p>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="FosterSchedule">Foster Schedule</a></li>
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="FosterOpportunities">Fosters Near Me</a></li>
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="MyFosters">My Fosters</a></li>
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="TransportSchedule">Transport Schedule</a></li>
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="TransportOpportunities">Transports Near Me</a></li>
-                <li><a asp-area="" asp-controller="Volunteers" asp-action="MyTransports">My Transports</a></li>
-
-
-            </ul>
-            <partial name="_LoginPartial" />
-        </div>
-
-    }
+   
 }

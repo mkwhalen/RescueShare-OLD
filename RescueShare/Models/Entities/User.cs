@@ -14,10 +14,7 @@ namespace RescueShare.Models
     public class User : IdentityUser
     {
 
-        public bool IsShelterWorker { get; set; }
-        public bool IsRescueWorker { get; set; }
-        public bool IsVolunteer { get; set; }
-        public bool IsDriver { get; set; }
+        public VolunteerType VolunteerType { get; set; }
         public string TransportDayAvailability { get; set; }
         public string TransportTimeAvailability { get; set; }
         public int TransportSpace { get; set; }

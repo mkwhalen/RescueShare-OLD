@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft
+@using RescueShare.Models.Entities;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -13,37 +14,39 @@
 {
     var user = await UserManager.GetUserAsync(User);
 
-    if (user.IsShelterWorker)
-    {
-        
-       
-        <p>
-            Hi, shelter user!
-        </p>
+    if (@User.FindFirst("VolunteerType").Value == "ShelterVolunteer")
 
-        <p>
-            <partial name="../Shelters/_ShelterLayout.cshtml" />
-        </p>
+    {
+        < p >
+        Hi, shelter user!
+        </ p >
+
+        < p >
+        < partial name = "../Shelters/_ShelterLayout.cshtml" />
+
+        </ p >
     }
 
-    if (user.IsRescueWorker)
+    if (@User.FindFirst("VolunteerType").Value == "ResuceOrganization")
     {
-        <p>
-            Hi, rescue user!
-        </p>
-        <p>
-            <partial name="../Rescues/_RescueLayout.cshtml" />
-        </p>
+        < p >
+        Hi, foster user!
+        </ p >
+        < p >
+        < partial name = "../Rescues/_RescueLayout.cshtml" />
+
+        </ p >
     }
 
-    if (user.IsVolunteer)
+    if (@User.FindFirst("VolunteerType").Value == "Driver")
     {
-        <p>
-            Hi, driver user!
-        </p>
-        <p>
-            <partial name="../Volunteers/_VolunteerLayout.cshtml" />
-        </p>
+        < p >
+        Hi, driver user!
+        </ p >
+        < p >
+        < partial name = "../Volunteers/_VolunteerLayout.cshtml" />
+
+        </ p >
     }
 }
 
