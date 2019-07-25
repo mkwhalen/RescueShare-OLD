@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190723021536_identity-scaffolding.cs" />
+    <Compile Remove="Migrations\20190723021536_identity-scaffolding.Designer.cs" />
+    <Compile Remove="Migrations\20190723022905_identity-scaffolding.cs" />
+    <Compile Remove="Migrations\20190723022905_identity-scaffolding.Designer.cs" />
+    <Compile Remove="Migrations\20190723173829_custom-identity.cs" />
+    <Compile Remove="Migrations\20190723173829_custom-identity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.38.2.1559" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -29,6 +38,10 @@
     <Content Update="Views\Volunteers\FosterOpportunities.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 
 </Project>

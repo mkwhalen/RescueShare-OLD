@@ -17,7 +17,7 @@ namespace RescueShare.Models
         public string Name { get; set; }
         [Required]
         public int Capacity { get; set; }
-        [Required, BindProperty, DisplayName("Type of Space")]
+        [Required, DisplayName("Type of Space")]
         public SpaceType SpaceType { get; set; }
         public string Notes { get; set; }
         public string ShelterId { get; set; }

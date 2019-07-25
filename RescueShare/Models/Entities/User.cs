@@ -1,14 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using RescueShare.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace RescueShare.Models
 {
     public class User : IdentityUser
     {
+
         public bool IsShelterWorker { get; set; }
         public bool IsRescueWorker { get; set; }
         public bool IsVolunteer { get; set; }
@@ -25,7 +30,9 @@ namespace RescueShare.Models
         public string FosterAges { get; set; }
         public string FosterWeights { get; set; }
         public string FosterTemperment { get; set; }
+        [PersonalData]
         public string FirstName { get; set; }
+        [PersonalData]
         public string LastName { get; set; }
 
         public virtual ICollection<UserDeniedTemperment> UserDeniedTemperments { get; set; }
@@ -41,5 +48,26 @@ namespace RescueShare.Models
                 return FirstName + " " + LastName;
             }
         }
+
+
     }
+
+    public class MyUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<User, IdentityRole>
+    {
+        public MyUserClaimsPrincipalFactory(
+            UserManager<User> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IOptions<IdentityOptions> optionsAccessor)
+            : base(userManager, roleManager, optionsAccessor)
+        {
+        }
+
+        protected override async Task<ClaimsIdentity> GenerateClaimsAsync(User user)
+        {
+            var identity = await base.GenerateClaimsAsync(user);
+            identity.AddClaim(new Claim("FirstName", user.FirstName ?? ""));
+            return identity;
+        }
+    }
+
 }
