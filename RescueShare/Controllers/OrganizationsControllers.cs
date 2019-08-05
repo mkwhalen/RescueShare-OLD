@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RescueShare.Models;
+using RescueShare.Models.Entities;
 
 namespace RescueShare.Controllers
 {
-    public class SheltersController : Controller
+    public class OrganizationsController : Controller
     {
         private readonly RescueContext _context;
 
-        public SheltersController(RescueContext context)
+        public OrganizationsController(RescueContext context)
         {
             _context = context;
         }
@@ -29,30 +30,30 @@ namespace RescueShare.Controllers
             return View(new List<Dog>());
         }
 
-        public async Task<IActionResult> ManageTransports()
-        {
-            var rescueContext = _context.Transports.Include(t => t.FosterReceiver).Include(t => t.FosterSender).Include(t => t.RescueReceiver).Include(t => t.RescueSender).Include(t => t.ShelterReceiver).Include(t => t.ShelterSender).Include(t => t.User);
-            var transports = await rescueContext.ToListAsync();
-            var viewmodels = transports.Select(t => new TransportViewModel(t));
-            return View(viewmodels);
-        }
+        //public async Task<IActionResult> ManageTransports()
+        //{
+        //    var rescueContext = _context.Transports.Include(t => t.FosterReceiver).Include(t => t.FosterSender).Include(t => t.RescueReceiver).Include(t => t.RescueSender).Include(t => t.OrganizationReceiver).Include(t => t.OrganizationSender).Include(t => t.User);
+        //    var transports = await rescueContext.ToListAsync();
+        //    var viewmodels = transports.Select(t => new TransportViewModel(t));
+        //    return View(viewmodels);
+        //}
 
-        // GET: Shelters
+        // GET: Organizations
         public async Task<IActionResult> Index()
         {
-            var shelter = await _context.ShelterMembers
-                .Include(sm => sm.Shelter)
+            var organization = await _context.OrganizationMembers
+                .Include(sm => sm.Organization)
                 .Where(sm => sm.UserId == User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value)
-                .Select(sm => sm.Shelter)
+                .Select(sm => sm.Organization)
                 .FirstOrDefaultAsync();
-            if (shelter == null)
+            if (organization == null)
             {
                 return NotFound();
             }
-            return View(shelter);
+            return View(organization);
         }
 
-        // GET: Shelters/Details/5
+        // GET: Organizations/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -61,23 +62,23 @@ namespace RescueShare.Controllers
             }
             
 
-            var shelter = await _context.Shelters
+            var organization = await _context.Organizations
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (organization == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(organization);
         }
 
-        // GET: Shelters/Create
+        // GET: Organizations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // GET: Shelters/Images
+        // GET: Organizations/Images
         [HttpGet]
         public IActionResult Image()
         {
@@ -88,23 +89,23 @@ namespace RescueShare.Controllers
             }
         }
 
-        // POST: Shelters/Create
+        // POST: Organizations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Organization organization)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shelter);
+                _context.Add(organization);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            return View(organization);
         }
 
-        // GET: Shelters/Edit/5
+        // GET: Organizations/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -112,22 +113,22 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
+            var organization = await _context.Organizations.FindAsync(id);
+            if (organization == null)
             {
                 return NotFound();
             }
-            return View(shelter);
+            return View(organization);
         }
 
-        // POST: Shelters/Edit/5
+        // POST: Organizations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Shelter shelter)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Address1,Address2,City,State,Zip,Phone,Email")] Organization organization)
         {
-            if (id != shelter.Id)
+            if (id != organization.Id)
             {
                 return NotFound();
             }
@@ -136,12 +137,12 @@ namespace RescueShare.Controllers
             {
                 try
                 {
-                    _context.Update(shelter);
+                    _context.Update(organization);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShelterExists(shelter.Id))
+                    if (!OrganizationExists(organization.Id))
                     {
                         return NotFound();
                     }
@@ -152,10 +153,10 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shelter);
+            return View(organization);
         }
 
-        // GET: Shelters/Delete/5
+        // GET: Organizations/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -163,30 +164,30 @@ namespace RescueShare.Controllers
                 return NotFound();
             }
 
-            var shelter = await _context.Shelters
+            var organization = await _context.Organizations
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (shelter == null)
+            if (organization == null)
             {
                 return NotFound();
             }
 
-            return View(shelter);
+            return View(organization);
         }
 
-        // POST: Shelters/Delete/5
+        // POST: Organizations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var shelter = await _context.Shelters.FindAsync(id);
-            _context.Shelters.Remove(shelter);
+            var organization = await _context.Organizations.FindAsync(id);
+            _context.Organizations.Remove(organization);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShelterExists(string id)
+        private bool OrganizationExists(string id)
         {
-            return _context.Shelters.Any(e => e.Id == id);
+            return _context.Organizations.Any(e => e.Id == id);
         }
     }
 }

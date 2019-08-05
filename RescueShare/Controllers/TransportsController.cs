@@ -34,13 +34,7 @@ namespace RescueShare.Controllers
             }
 
             var transport = await _context.Transports
-                .Include(t => t.FosterReceiver)
-                .Include(t => t.FosterSender)
-                .Include(t => t.RescueReceiver)
-                .Include(t => t.RescueSender)
-                .Include(t => t.ShelterReceiver)
-                .Include(t => t.ShelterSender)
-                .Include(t => t.User)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (transport == null)
             {
@@ -53,13 +47,7 @@ namespace RescueShare.Controllers
         // GET: Transports/Create
         public IActionResult Create()
         {
-            ViewData["FosterReceiverId"] = new SelectList(_context.Set<Foster>(), "Id", "Id");
-            ViewData["FosterSenderId"] = new SelectList(_context.Set<Foster>(), "Id", "Id");
-            ViewData["RescueReceiverId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id");
-            ViewData["RescueSenderId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id");
-            ViewData["ShelterReceiverId"] = new SelectList(_context.Shelters, "Id", "Id");
-            ViewData["ShelterSenderId"] = new SelectList(_context.Shelters, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+           
             return View();
         }
 
@@ -68,7 +56,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PickupTime,DropoffTime,TransportTime,ShelterSenderId,ShelterReceiverId,FosterSenderId,FosterReceiverId,RescueSenderId,RescueReceiverId,UserId,ReceiverType,SenderType")] Transport transport)
+        public async Task<IActionResult> Create([Bind("Id,PickupTime,DropoffTime,TransportTime")] Transport transport)
         {
             if (ModelState.IsValid)
             {
@@ -76,13 +64,7 @@ namespace RescueShare.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FosterReceiverId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterReceiverId);
-            ViewData["FosterSenderId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterSenderId);
-            ViewData["RescueReceiverId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueReceiverId);
-            ViewData["RescueSenderId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueSenderId);
-            ViewData["ShelterReceiverId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterReceiverId);
-            ViewData["ShelterSenderId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterSenderId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", transport.UserId);
+            
             return View(transport);
         }
 
@@ -99,12 +81,7 @@ namespace RescueShare.Controllers
             {
                 return NotFound();
             }
-            ViewData["FosterReceiverId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterReceiverId);
-            ViewData["FosterSenderId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterSenderId);
-            ViewData["RescueReceiverId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueReceiverId);
-            ViewData["RescueSenderId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueSenderId);
-            ViewData["ShelterReceiverId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterReceiverId);
-            ViewData["ShelterSenderId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterSenderId);
+           
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", transport.UserId);
             return View(transport);
         }
@@ -114,7 +91,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,PickupTime,DropoffTime,TransportTime,ShelterSenderId,ShelterReceiverId,FosterSenderId,FosterReceiverId,RescueSenderId,RescueReceiverId,UserId,ReceiverType,SenderType")] Transport transport)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,PickupTime,DropoffTime,TransportTime")] Transport transport)
         {
             if (id != transport.Id)
             {
@@ -141,13 +118,7 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FosterReceiverId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterReceiverId);
-            ViewData["FosterSenderId"] = new SelectList(_context.Set<Foster>(), "Id", "Id", transport.FosterSenderId);
-            ViewData["RescueReceiverId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueReceiverId);
-            ViewData["RescueSenderId"] = new SelectList(_context.Set<Rescue>(), "Id", "Id", transport.RescueSenderId);
-            ViewData["ShelterReceiverId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterReceiverId);
-            ViewData["ShelterSenderId"] = new SelectList(_context.Shelters, "Id", "Id", transport.ShelterSenderId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", transport.UserId);
+          
             return View(transport);
         }
 
@@ -160,13 +131,7 @@ namespace RescueShare.Controllers
             }
 
             var transport = await _context.Transports
-                .Include(t => t.FosterReceiver)
-                .Include(t => t.FosterSender)
-                .Include(t => t.RescueReceiver)
-                .Include(t => t.RescueSender)
-                .Include(t => t.ShelterReceiver)
-                .Include(t => t.ShelterSender)
-                .Include(t => t.User)
+                
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (transport == null)
             {

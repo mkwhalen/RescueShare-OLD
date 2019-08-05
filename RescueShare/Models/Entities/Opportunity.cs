@@ -16,6 +16,6 @@ namespace RescueShare.Models.Entities
         public string LocationId { get; set; }
 
         public virtual OpportunityType Type { get; set; }
-        public virtual Shelter Location { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

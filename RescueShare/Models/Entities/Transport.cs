@@ -21,17 +21,7 @@ namespace RescueShare.Models
         public string RescueSenderId { get; set; }
         public string RescueReceiverId { get; set; }
         public string UserId { get; set; }
-        public ReceiverType ReceiverType { get; set; }
-        public SenderType SenderType { get; set; }
-
-        public virtual List<TransportMember> Transporters { get; set; }
-        public virtual Rescue OrganizingRescue { get; set; }
-        public virtual Shelter ShelterSender { get; set; }
-        public virtual Shelter ShelterReceiver { get; set; }
-        public virtual Foster FosterSender { get; set; }
-        public virtual Foster FosterReceiver { get; set; }
-        public virtual Rescue RescueSender { get; set; }
-        public virtual Rescue RescueReceiver { get; set; }
+        
         public virtual User User { get; set; }
 
 

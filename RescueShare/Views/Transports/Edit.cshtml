@@ -1,4 +1,4 @@
-﻿@model RescueShare.Models.TransportViewModel
+﻿@model RescueShare.Models.Transport
 
 @{
     ViewData["Title"] = "Edit";
@@ -28,51 +28,7 @@
                 <input asp-for="TransportTime" class="form-control" />
                 <span asp-validation-for="TransportTime" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ShelterSenderId" class="control-label"></label>
-                <select asp-for="ShelterSenderId" class="form-control" asp-items="ViewBag.ShelterSenderId"></select>
-                <span asp-validation-for="ShelterSenderId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShelterReceiverId" class="control-label"></label>
-                <select asp-for="ShelterReceiverId" class="form-control" asp-items="ViewBag.ShelterReceiverId"></select>
-                <span asp-validation-for="ShelterReceiverId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FosterSenderId" class="control-label"></label>
-                <select asp-for="FosterSenderId" class="form-control" asp-items="ViewBag.FosterSenderId"></select>
-                <span asp-validation-for="FosterSenderId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FosterReceiverId" class="control-label"></label>
-                <select asp-for="FosterReceiverId" class="form-control" asp-items="ViewBag.FosterReceiverId"></select>
-                <span asp-validation-for="FosterReceiverId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RescueSenderId" class="control-label"></label>
-                <select asp-for="RescueSenderId" class="form-control" asp-items="ViewBag.RescueSenderId"></select>
-                <span asp-validation-for="RescueSenderId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RescueReceiverId" class="control-label"></label>
-                <select asp-for="RescueReceiverId" class="form-control" asp-items="ViewBag.RescueReceiverId"></select>
-                <span asp-validation-for="RescueReceiverId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReceiverType" class="control-label"></label>
-                <select asp-for="ReceiverType" class="form-control"></select>
-                <span asp-validation-for="ReceiverType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SenderType" class="control-label"></label>
-                <select asp-for="SenderType" class="form-control"></select>
-                <span asp-validation-for="SenderType" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>

@@ -52,7 +52,7 @@
                 @Html.DisplayNameFor(model => model.Space)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Shelter)
+                @Html.DisplayNameFor(model => model.Organization)
             </th>
             <th></th>
         </tr>
@@ -100,7 +100,7 @@
                 @Html.DisplayFor(modelItem => item.Space.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Shelter.Id)
+                @Html.DisplayFor(modelItem => item.Organization.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

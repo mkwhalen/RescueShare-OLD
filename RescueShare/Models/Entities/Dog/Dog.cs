@@ -30,12 +30,12 @@ namespace RescueShare.Models
         [DisplayName("Tagged for Rescue")]
         public bool IsSaved { get; set; }
         public string SpaceId { get; set; }
-        public string ShelterId { get; set; }
+        public string OrganizationId { get; set; }
         public string ImageId { get; set; }
 
         public virtual Image Image { get; set; }
         public virtual Space Space { get; set; }
-        public virtual Shelter Shelter { get; set; }
+        public virtual Organization Organization { get; set; }
         public virtual DogBreed Breed { get; set; }
     }
 }

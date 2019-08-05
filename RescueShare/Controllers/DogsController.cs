@@ -21,7 +21,7 @@ namespace RescueShare.Controllers
         // GET: Dogs
         public async Task<IActionResult> Index()
         {
-            var rescueContext = _context.Dogs.Include(d => d.Shelter).Include(d => d.Space);
+            var rescueContext = _context.Dogs.Include(d => d.Organization).Include(d => d.Space);
             return View(await rescueContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace RescueShare.Controllers
             }
 
             var dog = await _context.Dogs
-                .Include(d => d.Shelter)
+                .Include(d => d.Organization)
                 .Include(d => d.Space)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (dog == null)
@@ -48,7 +48,7 @@ namespace RescueShare.Controllers
         // GET: Dogs/Create
         public IActionResult Create()
         {
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id");
             ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id");
             return View();
         }
@@ -58,7 +58,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,ShelterId")] Dog dog)
+        public async Task<IActionResult> Create([Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,OrganizationId")] Dog dog)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace RescueShare.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", dog.OrganizationId);
             ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
             return View(dog);
         }
@@ -84,7 +84,7 @@ namespace RescueShare.Controllers
             {
                 return NotFound();
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", dog.OrganizationId);
             ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
             return View(dog);
         }
@@ -94,7 +94,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,ShelterId")] Dog dog)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Weight,Age,InDate,OutDate,Breed,CurrentMedications,CurrentInjuries,Food,Notes,Flag,IsSaved,SpaceId,OrganizationId")] Dog dog)
         {
             if (id != dog.Id)
             {
@@ -121,7 +121,7 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", dog.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", dog.OrganizationId);
             ViewData["SpaceId"] = new SelectList(_context.Spaces, "Id", "Id", dog.SpaceId);
             return View(dog);
         }
@@ -135,7 +135,7 @@ namespace RescueShare.Controllers
             }
 
             var dog = await _context.Dogs
-                .Include(d => d.Shelter)
+                .Include(d => d.Organization)
                 .Include(d => d.Space)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (dog == null)

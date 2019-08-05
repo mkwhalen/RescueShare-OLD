@@ -14,39 +14,40 @@
 {
     var user = await UserManager.GetUserAsync(User);
 
+
     if (@User.FindFirst("VolunteerType").Value == "ShelterVolunteer")
 
     {
-        < p >
+        <p>
         Hi, shelter user!
-        </ p >
+        </p>
 
-        < p >
-        < partial name = "../Shelters/_ShelterLayout.cshtml" />
+        <p>
+        <partial name = "../Shelters/_ShelterLayout.cshtml"/>
 
-        </ p >
+        </p>
     }
 
     if (@User.FindFirst("VolunteerType").Value == "ResuceOrganization")
     {
-        < p >
+        <p>
         Hi, foster user!
-        </ p >
-        < p >
-        < partial name = "../Rescues/_RescueLayout.cshtml" />
+        </p>
+        <p>
+        <partial name = "../Rescues/_RescueLayout.cshtml" />
 
-        </ p >
+        </p>
     }
 
     if (@User.FindFirst("VolunteerType").Value == "Driver")
     {
-        < p >
+        <p>
         Hi, driver user!
-        </ p >
-        < p >
-        < partial name = "../Volunteers/_VolunteerLayout.cshtml" />
+        </p>
+        <p>
+        <partial name = "../Volunteers/_VolunteerLayout.cshtml" />
 
-        </ p >
+        </p>
     }
 }
 

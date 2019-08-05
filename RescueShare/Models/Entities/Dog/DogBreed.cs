@@ -9,6 +9,5 @@ namespace RescueShare.Models.Entities
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        // note: you can add other properties here for things like temperment, size, etc.
     }
 }

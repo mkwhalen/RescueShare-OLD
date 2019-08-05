@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace RescueShare.Models.Entities
 {
-    public class UserDeniedDogBreed
+    public class FosterDeniedDogBreed
     {
         public string Id { get; set; }
-        public string UserId { get; set; }
         public string DogBreedId { get; set; }
+        public string FosterPreferencesId { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual FosterPreferences DriverPreferences { get; set; }
         public virtual DogBreed DogBreed { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RescueShare.Models.TransportViewModel>
+﻿@model RescueShare.Models.Transport
 
 @{
     ViewData["Title"] = "Index";
@@ -24,80 +24,11 @@
                 @Html.DisplayNameFor(model => model.TransportTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReceiverType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SenderType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShelterSender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShelterReceiver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FosterSender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FosterReceiver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RescueSender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RescueReceiver)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickupTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DropoffTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransportTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiverType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SenderType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShelterSender.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShelterReceiver.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FosterSender.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FosterReceiver.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RescueSender.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RescueReceiver.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+    }
 </table>

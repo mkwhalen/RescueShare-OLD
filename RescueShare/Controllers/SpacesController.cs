@@ -23,7 +23,7 @@ namespace RescueShare.Controllers
         // GET: Spaces
         public async Task<IActionResult> Index()
         {
-            var rescueContext = _context.Spaces.Include(s => s.Shelter);
+            var rescueContext = _context.Spaces.Include(s => s.Organization);
             return View(await rescueContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace RescueShare.Controllers
             }
 
             var space = await _context.Spaces
-                .Include(s => s.Shelter)
+                .Include(s => s.Organization)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (space == null)
             {
@@ -49,7 +49,7 @@ namespace RescueShare.Controllers
         // GET: Spaces/Create
         public IActionResult Create()
         {
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id");
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id");
             return View();
         }
         
@@ -59,7 +59,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,SpaceType,ShelterId,Notes")] Space space)
+        public async Task<IActionResult> Create([Bind("Id,Name,Capacity,SpaceType,OrganizationId,Notes")] Space space)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace RescueShare.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", space.OrganizationId);
             return View(space);
         }
 
@@ -84,7 +84,7 @@ namespace RescueShare.Controllers
             {
                 return NotFound();
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", space.OrganizationId);
             return View(space);
         }
 
@@ -93,7 +93,7 @@ namespace RescueShare.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,SpaceType,ShelterId,Notes")] Space space)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Capacity,SpaceType,OrganizationId,Notes")] Space space)
         {
             if (id != space.Id)
             {
@@ -120,7 +120,7 @@ namespace RescueShare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ShelterId"] = new SelectList(_context.Shelters, "Id", "Id", space.ShelterId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Id", "Id", space.OrganizationId);
             return View(space);
         }
 
@@ -133,7 +133,7 @@ namespace RescueShare.Controllers
             }
 
             var space = await _context.Spaces
-                .Include(s => s.Shelter)
+                .Include(s => s.Organization)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (space == null)
             {

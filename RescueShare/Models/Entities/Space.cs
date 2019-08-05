@@ -20,9 +20,9 @@ namespace RescueShare.Models
         [Required, DisplayName("Type of Space")]
         public SpaceType SpaceType { get; set; }
         public string Notes { get; set; }
-        public string ShelterId { get; set; }
+        public string OrganizationId { get; set; }
 
         public virtual ICollection<Dog> Dogs { get; set; }
-        public virtual Shelter Shelter { get; set; }
+        public virtual Organization Organization { get; set; }
     }
 }

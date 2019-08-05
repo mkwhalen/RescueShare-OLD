@@ -1,20 +1,20 @@
-﻿@model RescueShare.Models.Shelter
+﻿@model RescueShare.Models.Entities.Organization
 
 @{
-    var ShelterName = Model.Name;
+    var OrganizationName = Model.Name;
 
 }
 
 <body>
-   
+
     <p>
         <partial name="_ShelterLayout" />
 
-        <header>Welcome, @ShelterName! Let's save some dogs today.</header>
+        <header>Welcome, @OrganizationName! Let's save some dogs today.</header>
     </p>
 
     <div>
-        <img src="~/images/defaultpuppy.jpg"/>
+        <img src="~/images/defaultpuppy.jpg" />
     </div>
 
 </body>
